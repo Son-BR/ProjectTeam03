@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <title>뉴스 요약</title>
+</head>
+<body>
+    <h1>뉴스 요약</h1>
+    <div class="input-container">
+        <label for="news-url">뉴스 URL:</label>
+        <input type="text" id="news-url" placeholder="뉴스 URL을 입력하세요">
+        <button onclick="summarizeNews()">요약</button>
+    </div>
+    <div id="summary-container" class="hidden">
+        <h2>뉴스 요약:</h2>
+        <p id="summary"></p>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

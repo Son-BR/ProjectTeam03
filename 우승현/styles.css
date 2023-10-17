@@ -1,0 +1,29 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+.input-container {
+    margin: 25px;
+}
+
+label {
+    font-weight: bold;
+}
+
+input {
+    width: 500px;
+    padding: 5px;
+}
+
+button {
+    padding: 5px 10px;
+    background-color: #ff0202;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
