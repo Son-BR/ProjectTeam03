@@ -12,7 +12,7 @@ app = Flask(__name__)
 def index():
     if request.method == 'POST':
         # HTML 폼에서 'text' 필드에서 데이터를 가져옵니다.
-        input_url = request.form['url']
+        input_url = request.form['url'] 
         
         
         
