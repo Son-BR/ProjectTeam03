@@ -3,7 +3,7 @@ from urllib.request import urlopen
 from bs4 import BeautifulSoup
 import openai
 
-app = Flask(__name__)
+app = Flask(__name__) 
 
 # 기본 루트 경로에 대한 라우트 설정
 @app.route('/', methods=['GET', 'POST'])
@@ -12,7 +12,7 @@ app = Flask(__name__)
 def index():
     if request.method == 'POST':
         # HTML 폼에서 'text' 필드에서 데이터를 가져옵니다.
-        input_url = request.form['url'] 
+        input_url = request.form['url']
         
         
         
@@ -27,7 +27,6 @@ def index():
 
         
         # 챗GPT
-    
         openai.api_key = '' # api key 입력
         messages=[]
         content = f"'{text}'를 간략히 요약해줘"
