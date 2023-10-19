@@ -10,8 +10,11 @@ import re
 
 app = Flask(__name__) 
 
+
+# 이건 제 네이버 api 여서 바꿔서 쓰세요
 client_id = "0At29T7vkcGGyngOl5BY"
 client_secret = "DJShkQKQXe"
+
 
 # 기본 루트 경로에 대한 라우트 설정
 @app.route('/', methods=['GET', 'POST'])
