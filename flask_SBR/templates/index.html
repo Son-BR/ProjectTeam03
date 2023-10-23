@@ -4,11 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>News Search</title>
+    <title>News Summary</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
 </head>
 
 <body>
+    
+    <!-- 여기에 이미지를 추가합니다 -->
+    <img src="../static/image/header.png" alt="헤더 이미지" id="header-image">
+
+    <!-- 왼쪽 사이드 이미지 -->
+    <div id="left-side">
+        <img src="../static/image/lside.png" alt="Left side image">
+    </div>
+
+    
     <form method="POST">
         <div id="container">
             <div id="search-form"> 
@@ -31,6 +41,14 @@
             </div>
         </div>
 </form>
+
+    <!-- 오른쪽 사이드 이미지 -->
+    <div id="right-side">
+        <img src="../static/image/rside.png" alt="Right side image">
+    </div>
+
+    <!-- 푸터에 이미지 추가 -->
+    <img src="../static/image/footer.png" alt="푸터 이미지" id="footer-image">
 
 </body>
 
