@@ -23,7 +23,7 @@ def index():
         text = text.split('기자 = ')[-1]
         
         # 챗GPT
-        openai.api_key = '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'
+        openai.api_key = ''
         messages=[]
         content = f"'{text}'를 간략히 요약해줘"
         
