@@ -1,16 +1,28 @@
-from flask import Flask, request, render_template
+from flask import Flask, render_template, request
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
-import openai 
+import openai
+import json
+import threading
 
-app = Flask(__name__) 
+app = Flask(__name__)
 
-# 기본 루트 경로에 대한 라우트 설정
+# OpenAI API 키 설정
+openai.api_key = ""
+
+content=''
+messages=[]
+completion=''
+
 @app.route('/', methods=['GET', 'POST'])
 
 
 
 def index():
+    global content
+    global completion
+    global messages
+    
     if request.method == 'POST':
         # HTML 폼에서 'text' 필드에서 데이터를 가져옵니다.
         input_url = request.form['url']
@@ -19,32 +31,37 @@ def index():
         html = urlopen(input_url)
         bs = BeautifulSoup(html.read(), 'html.parser')
 
-        text = bs.find('article', {'id':'dic_area'}).get_text()
-        text = text.split('기자 = ')[-1]
+        content = bs.find('article', {'id':'dic_area'}).get_text()
+        content = f"{content.split('기자 = ')[-1]}를 간략히 요약해 줘"
         
-        # 챗GPT
-        openai.api_key = ''
-        messages=[]
-        content = f"'{text}'를 간략히 요약해줘"
-        
-        # 질문 저장
         messages.append({"role":"user", "content":content})
         
         completion = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=messages, stream=True)
         
-        summary=''
-        
-        for item in completion:
-            if 'content' in item.choices[0].delta:
-                summary+=item.choices[0].delta.content
-                print(item.choices[0].delta.content)
-            else:
-                break
-        
-        return render_template('index.html', summary=summary)
     return render_template('index.html')
 
+
+def stream_response():
     
+    global completion
+
+    for item in completion:
+        message = item.choices[0].delta.content
+        messages.append({"role": "assistant", "content": message})
+
+
+
+@app.route('/get_messages')
+def get_messages():
+    
+    return json.dumps(messages)
+
+@app.after_request
+def after_request(response):
+    t = threading.Thread(target=stream_response)
+    t.start()
+    return response
+
 
 if __name__ == '__main__':
     app.run(debug=True)
